@@ -4,7 +4,7 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>plug.gs</title>
+		<title>PhoneGap Template</title>
 		<link rel="shortcut icon" href="favicon.ico">
 		<link rel="stylesheet" href="css/themes/default/jquery.mobile-1.4.5.min.css?v=1">
 		<link rel="stylesheet" href="_assets/css/jqm-demos.css?v=1">
@@ -12,21 +12,30 @@
 		<script src="_assets/js/index.js?v=1"></script>
 		<script src="js/jquery.mobile-1.4.5.min.js?v=1"></script>
 		<script type="text/javascript" charset="utf-8" src="cordova.js"></script>
-
+		<script type="text/javascript" charset="utf-8" src="js/login.js"></script>
+		<script type="text/javascript" charset="utf-8">
+			// Check login first
+			checkLogin();
+    		var userName = window.localStorage.getItem("userName");
+    		var userId = window.localStorage.getItem("userId");
+    		var regDate = window.localStorage.getItem("regDate");
+		</script>
 	</head>
 	<body>
 
 		<div data-role="header" class="jqm-header" data-position="fixed" data-tap-toggle="false">
-			<h2><a href="./dashboard.php">Logo</a></h2>
+			<h2><a href="./index.html">Logo</a></h2>
 			<a data-rel="back" href="#" data-ajax="false" class=" ui-btn ui-btn-icon-notext ui-corner-all ui-icon-back ui-nodisc-icon ui-alt-icon ui-btn-left">Search</a>
-			<a href="./logout.php" data-ajax="false" class="ui-btn ui-btn-icon-notext ui-corner-all ui-icon-power ui-nodisc-icon ui-alt-icon ui-btn-right">Members</a>
-		</div><!-- /header -->
+			<a href="./login.html" data-ajax="false" class="ui-btn ui-btn-icon-notext ui-corner-all ui-icon-power ui-nodisc-icon ui-alt-icon ui-btn-right">Members</a>
+		</div>
+
+		<!-- /header -->
 
 		<div role="main" class="ui-content jqm-content" style="margin-top:-40px;">
-			<h3 style="margin-bottom: 14px; margin-top: 40px;">Welcome Josh Storz</h3>
+			<h3 style="margin-bottom: 14px; margin-top: 40px;">Welcome <script>document.write(userName);</script></h3>
 
 			<p style="font-size:12px; margin-top:-14px;">
-				Member Since: <strong>Feb 5th, 2015</strong>
+				Member Since: <strong><script>document.write(regDate);</script></strong>
 			</p>
 
 			<h3 style="margin-bottom: -6px; margin-top: 20px;">Clusters</h3>
@@ -50,7 +59,9 @@
 					</div>
 				</div>
 			</div>
-		</div><!-- /content -->
+		</div>
+
+		<!-- /content -->
 
 		<div data-role="footer" data-position="fixed" class="jqm-footer" data-tap-toggle="false" data-ajax="false">
 			<div data-role="navbar">
@@ -65,7 +76,9 @@
 						<a href="/pluggs/alerts.php" class="ui-btn ui-icon-alert ui-btn-icon-top ui-shadow ui-corner-all" >Alerts</a>
 					</li>
 				</ul>
-			</div><!-- /navbar -->
-		</div><!-- /footer -->
+			</div>
+		</div>
+
+		<!-- /footer -->
 	</body>
 </html>

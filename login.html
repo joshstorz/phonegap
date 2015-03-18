@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>PhoneGap Template</title>
+		<link rel="shortcut icon" href="favicon.ico">
+		<link rel="stylesheet" href="css/themes/default/jquery.mobile-1.4.5.min.css?v=1">
+		<link rel="stylesheet" href="_assets/css/jqm-demos.css?v=1">
+		<script src="js/jquery.js?v=1"></script>
+		<script src="_assets/js/index.js?v=1"></script>
+		<script src="js/jquery.mobile-1.4.5.min.js?v=1"></script>
+		<script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+    	<script type="text/javascript" charset="utf-8" src="js/login.js"></script>
+	</head>
+	<body>
+
+		<div data-role="header" class="jqm-header" data-position="fixed" data-tap-toggle="false">
+			<h2><a href="./index.html">Logo</a></h2>
+			<a data-rel="back" href="#" data-ajax="false" class=" ui-btn ui-btn-icon-notext ui-corner-all ui-icon-back ui-nodisc-icon ui-alt-icon ui-btn-left">Search</a>
+			<a href="./login.html" data-ajax="false" class="ui-btn ui-btn-icon-notext ui-corner-all ui-icon-power ui-nodisc-icon ui-alt-icon ui-btn-right">Members</a>
+		</div>
+		
+		<!-- /header -->
+
+		<div role="main" class="ui-content jqm-content" style="margin-top:-40px;">
+			<h3 style="margin-bottom: 14px; margin-top: 40px;">Please Sign In</h3>
+			<p>Please Login Below.  Once authorized, clicking the power button (top right) will automatically log you out.</p>
+				<form id="loginForm">
+					<div data-role="fieldcontain" class="ui-hide-label">
+						<label for="username">Username:</label>
+						<input type="text" name="username" id="username" value="" placeholder="Username" />
+					</div>
+
+					<div data-role="fieldcontain" class="ui-hide-label">
+						<label for="password">Password:</label>
+						<input type="password" name="password" id="password" value="" placeholder="Password" />
+					</div>
+
+					<input id="postdata" type="button" value="Login" />
+				</form>
+			</div>
+		</div>
+		
+		<!-- /content -->
+
+		<div data-role="footer" data-position="fixed" class="jqm-footer" data-tap-toggle="false" data-ajax="false">
+			<div data-role="navbar">
+				<ul>
+					<li style="padding-top:8px;">
+						<a href="/pluggs/master_search.php?search_all" class="ui-btn ui-icon-search ui-btn-icon-top ui-shadow ui-corner-all">Search</a>
+					</li>
+					<li style="padding-top:8px;">
+						<a href="/pluggs/dashboard.php" class="ui-btn ui-icon-gear ui-btn-icon-top ui-shadow ui-corner-all">Dashboard</a>
+					</li>
+					<li style="padding-top:8px;">
+						<a href="/pluggs/alerts.php" class="ui-btn ui-icon-alert ui-btn-icon-top ui-shadow ui-corner-all" >Alerts</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		
+		<!-- /footer -->
+	</body>
+</html>
+<script>
+        window.localStorage.removeItem("userHash");
+        window.localStorage.removeItem("userName");
+        window.localStorage.removeItem("userId");
+        window.localStorage.removeItem("regDate");
+        
+		$("#postdata").click(function() {
+			var u = document.getElementById("username").value ;
+			var p = document.getElementById("password").value ;
+			$.ajax({
+				url : "http://50.57.87.125/pluggs/static_login.php",
+				dataType : "jsonp",
+				jsonp : "mycallback",
+				data : "username="+u+"&password="+p+"",
+				success : function(data) {
+					if (data.userHash) {
+        				window.localStorage.setItem("userHash", data.userHash);
+        				window.localStorage.setItem("userName", data.userName);
+        				window.localStorage.setItem("userId", data.userId);
+        				window.localStorage.setItem("regDate", data.regDate);
+						window.location = 'index.html' ;
+					} else {
+						alert('Error: '+data.err);
+					}
+				}
+			});
+
+		});
+</script>
